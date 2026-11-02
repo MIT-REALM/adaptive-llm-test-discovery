@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adaptive Test Case Discovery — MIT REALM</title>
+  <meta name="description" content="Sample-efficient adaptive experimental design for discovering challenging test scenarios for LLM-assisted decision making. NeurIPS 2026 · MIT REALM." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="https://aeroastro.mit.edu/realm/" target="_blank" rel="noopener">
+      <span class="brand-mark">REALM</span>
+      <span class="brand-sub">MIT</span>
+    </a>
+    <nav class="nav">
+      <a href="#abstract">Abstract</a>
+      <a href="#results">Results</a>
+      <a href="#figures">Figures</a>
+      <a href="#code">Code</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">NeurIPS 2026 · Project page</p>
+      <h1>Adaptive Test Case Discovery for LLM-Assisted Decision Making in High-Stakes Domains</h1>
+      <p class="lede">
+        A sample-efficient scenario design strategy that uses a flow-based surrogate to acquire
+        diverse, high-utility test cases for LLM decision pipelines.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="assets/paper.pdf">Paper PDF</a>
+        <a class="btn btn-ghost" href="https://github.com/MIT-REALM/adaptive-llm-test-discovery" id="code-link">
+          GitHub Code
+        </a>
+        <a class="btn btn-ghost" href="https://aeroastro.mit.edu/realm/" target="_blank" rel="noopener">REALM Lab</a>
+      </div>
+      <p class="authors">
+        Anjali Parashar, Carson Sobolewski, Yingke Li, Fei Chen, Chuchu Fan<br />
+        <span>Laboratory for Information &amp; Decision Systems (LIDS) · MIT</span>
+      </p>
+    </section>
+
+    <section id="abstract" class="section">
+      <h2>Abstract</h2>
+      <p>
+        Large language models are increasingly used for assistive decision-making in high-stakes
+        domains, yet their outputs can be unreliable and difficult to audit. We formulate
+        pre-deployment testing as adaptive experimental design, using a flow-matching surrogate
+        to sequentially acquire scenarios that balance optimization toward challenging cases with
+        diverse exploration via mutual information. Across bank loan approval, stock prediction
+        from news, disaster resource allocation, and Camelyon17 pathology, the method discovers
+        challenging scenarios with high coverage of scenario space.
+      </p>
+    </section>
+
+    <section id="results" class="section">
+      <h2>Selected results</h2>
+      <p class="section-note">
+        Ablation overview (mean ± std over seeds). Template excerpt from Table 1 of the paper —
+        full baselines and appendices in the PDF.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Setting</th>
+              <th>Method</th>
+              <th>Avg. cum. utility</th>
+              <th>Coverage</th>
+              <th>Vendi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="group"><td colspan="5">Bank Loan (h₁)</td></tr>
+            <tr class="ours">
+              <td></td><td>Flow (ours)</td>
+              <td>0.829 ± 0.023</td><td>1.141 ± 0.032</td><td>2.80 ± 0.17</td>
+            </tr>
+            <tr><td></td><td>No-MI</td><td>0.899 ± 0.026</td><td>0.914 ± 0.144</td><td>2.07 ± 0.34</td></tr>
+            <tr><td></td><td>Only-MI</td><td>0.362 ± 0.019</td><td>0.883 ± 0.043</td><td>3.45 ± 0.14</td></tr>
+
+            <tr class="group"><td colspan="5">News (h₃)</td></tr>
+            <tr class="ours">
+              <td></td><td>Flow (ours)</td>
+              <td>0.987 ± 0.138</td><td>0.902 ± 0.121</td><td>1.87 ± 0.24</td>
+            </tr>
+            <tr><td></td><td>No-MI</td><td>1.151 ± 0.050</td><td>0.733 ± 0.094</td><td>1.23 ± 0.22</td></tr>
+            <tr><td></td><td>Only-MI</td><td>0.791 ± 0.020</td><td>0.821 ± 0.041</td><td>2.46 ± 0.10</td></tr>
+
+            <tr class="group"><td colspan="5">Disaster Image (h₃)</td></tr>
+            <tr class="ours">
+              <td></td><td>Flow (ours)</td>
+              <td>0.426 ± 0.029</td><td>0.996 ± 0.077</td><td>1.15 ± 0.02</td>
+            </tr>
+            <tr><td></td><td>No-MI</td><td>0.480 ± 0.014</td><td>1.097 ± 0.008</td><td>1.10 ± 0.02</td></tr>
+            <tr><td></td><td>Only-MI</td><td>0.311 ± 0.017</td><td>0.704 ± 0.061</td><td>1.18 ± 0.01</td></tr>
+
+            <tr class="group"><td colspan="5">Camelyon17 (h₁)</td></tr>
+            <tr class="ours">
+              <td></td><td>Flow (ours)</td>
+              <td>0.650 ± 0.080</td><td>3.40 ± 0.15</td><td>2.40 ± 0.35</td>
+            </tr>
+            <tr><td></td><td>No-MI</td><td>0.690 ± 0.093</td><td>3.25 ± 0.10</td><td>2.14 ± 0.26</td></tr>
+            <tr><td></td><td>Only-MI</td><td>0.220 ± 0.064</td><td>1.91 ± 0.50</td><td>4.18 ± 1.20</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="stat-strip">
+        <div>
+          <strong>Tasks</strong>
+          <span>Bank · News · Disaster · Camelyon17</span>
+        </div>
+        <div>
+          <strong>Surrogate</strong>
+          <span>Flow matching + ensemble MI</span>
+        </div>
+        <div>
+          <strong>Acquisition</strong>
+          <span>Utility + epistemic exploration</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="figures" class="section">
+      <h2>Figures</h2>
+      <p class="section-note">Representative plots from the current analysis pipeline. More will be added as the camera-ready is finalized.</p>
+
+      <figure class="fig">
+        <img src="assets/figures/disaster_obj.png" alt="Disaster task average cumulative utility curves" />
+        <figcaption>Disaster — running objective / utility across acquisitions.</figcaption>
+      </figure>
+
+      <figure class="fig">
+        <img src="assets/figures/disaster_cov.png" alt="Disaster task coverage curves" />
+        <figcaption>Disaster — coverage of high-utility scenario regions.</figcaption>
+      </figure>
+
+      <figure class="fig">
+        <img src="assets/figures/fig_camelyon17_scenario_clusters.png" alt="Camelyon17 scenario cluster visualization" />
+        <figcaption>Camelyon17 — scenario-mode clusters in embedding space.</figcaption>
+      </figure>
+
+      <figure class="fig">
+        <img src="assets/figures/fig_camelyon17_baseline_mechanisms.png" alt="Camelyon17 baseline mechanism panels" />
+        <figcaption>Camelyon17 — baseline failure mechanisms (BNN / IBNN / RS).</figcaption>
+      </figure>
+    </section>
+
+    <section id="code" class="section code-section">
+      <h2>Code &amp; citation</h2>
+      <p>
+        Official implementation will live under the
+        <a href="https://github.com/MIT-REALM" target="_blank" rel="noopener">MIT-REALM</a>
+        GitHub organization. Development mirror:
+        <a href="https://github.com/anjaliParashar/bayes_llm" target="_blank" rel="noopener">anjaliParashar/bayes_llm</a>.
+      </p>
+      <pre class="cite"><code>@inproceedings{parashar2026adaptive,
+  title={Adaptive Test Case Discovery for LLM-Assisted Decision Making in High-Stakes Domains},
+  author={Parashar, Anjali and Sobolewski, Carson and Li, Yingke and Chen, Fei and Fan, Chuchu},
+  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
+  year={2026}
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      <a href="https://aeroastro.mit.edu/realm/">Reliable Autonomous Systems Lab (REALM)</a>
+      · MIT AeroAstro / LIDS
+    </p>
+    <p class="fine">Template project page — update figures and links as artifacts finalize.</p>
+  </footer>
+</body>
+</html>
